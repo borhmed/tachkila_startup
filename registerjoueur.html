@@ -38,44 +38,49 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" action="./registerjoueur.php" method="post" id="form-joueur" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" name="first_name" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
+                                        <input type="text" name="first_name" class="form-control form-control-user" id="FirstName"
+                                            placeholder="First Name" required>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" name="last_name" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
+                                        <input type="text" name="last_name" class="form-control form-control-user" id="LastName"
+                                            placeholder="Last Name" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
+                                    <input type="email" name="email" class="form-control form-control-user" id="Email"
+                                        placeholder="Email Address" required>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" name="city" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="City">
+                                        <input type="text" name="city" class="form-control form-control-user" id="city"
+                                            placeholder="City" required>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="tel" name="phone_number" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Phone Number">
+                                        <input type="tel" name="phone_number" class="form-control form-control-user" id="phonenumber"
+                                            placeholder="Phone Number" pattern="\d{8}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                        <input type="password" name="password" class="form-control form-control-user"
+                                            id="Password" placeholder="Password" required>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                                        <input type="password" name="valid-Password" class="form-control form-control-user"
+                                            id="valid-Password" placeholder="confirm Password" required>
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                <div class="form-group">
+                                    <label for="photo">Please drop your photo in JPG format</label>
+                                    <input name="photo" type="file" class="form-control" id="photo-joueur" accept=".pdf" required>
+                                    <small id="photo-ph" class="form-text text-muted">Please upload your photo in JPG format, with a maximum file size of 2MB.</small>
+                                </div>
+                                <button name="registrer" class="btn btn-primary btn-user btn-block">
                                     Register Account
-                                </a>
+                                </button>
                                 <hr>
                                 <a href="index.html" class="btn btn-google btn-user btn-block">
                                     <i class="fab fa-google fa-fw"></i> Register with Google
@@ -108,6 +113,23 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    
+    <script>
+        // Récupérer le paramètre d'erreur depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+
+        // Vérifier s'il y a une erreur et afficher l'alerte correspondante
+        if (error === 'email_in_use') {
+            alert('L\'email est déjà utilisé. Veuillez en choisir un autre.');
+
+            // Supprimer le paramètre d'erreur de l'URL sans recharger la page
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        }
+    </script>
+    
 
 </body>
 
